@@ -1,2 +1,3 @@
 # OCW
-A collection of OCW courses I've taken
+A collection of OCW courses 
+
