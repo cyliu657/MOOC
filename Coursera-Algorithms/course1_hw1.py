@@ -13,14 +13,23 @@ def karatsuba(_a, _b):
     :param _b: an integer
     :return: multiplication of a and b
     '''
-    x_0 = _a % 100
-    y_0 = _b % 100
-    x_1 = (_a - x_0) / 100
-    y_1 = (_b - y_0) / 100
-    z_2 = x_1 * y_1
-    z_1 = x_1 * y_0 + x_0 * y_1
-    z_0 = x_0 * y_0
-    return int(z_2 * (100 ** 2) + z_1 * 100 + z_0)
+    if len(str(_a)) == 1 or len(str(_b)) == 1:
+        return _a * _b
+    else:
+        n = max(len(str(_a)), len(str(_b)))
+        base = n // 2
+
+        a = _a // 10 ** (base)
+        b = _a % 10 ** (base)
+        c = _b // 10 ** (base)
+        d = _b % 10 ** (base)
+
+        ac = karatsuba(a, c)
+        bd = karatsuba(b, d)
+        ad_bc = karatsuba(a+b, c+d) - ac - bd
+
+        prod = ac * 10 ** (2*base) + (ad_bc * 10 ** base) + bd
+        return prod
 
 NUM1 = 3141592653589793238462643383279502884197169399375105820974944592
 NUM2 = 2718281828459045235360287471352662497757247093699959574966967627
